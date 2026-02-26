@@ -10,23 +10,27 @@ from drf_spectacular.views import (
 )
 
 urlpatterns = [
-    # Admin
-    path("admin/", admin.site.urls),
     # Apps
     path("core/", include(core_urls)),
-    # API Schema
-    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
-    path(
-        "api/docs/",
-        SpectacularSwaggerView.as_view(url_name="schema"),
-        name="swagger-ui",
-    ),
-    path(
-        "api/schema/redoc/",
-        SpectacularRedocView.as_view(url_name="schema"),
-        name="redoc",
-    ),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        # Admin
+        path("admin/", admin.site.urls),
+        # API schema and docs
+        path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+        path(
+            "api/docs/",
+            SpectacularSwaggerView.as_view(url_name="schema"),
+            name="swagger-ui",
+        ),
+        path(
+            "api/schema/redoc/",
+            SpectacularRedocView.as_view(url_name="schema"),
+            name="redoc",
+        ),
+    ]
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
