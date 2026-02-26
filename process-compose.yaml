@@ -73,10 +73,3 @@ processes:
   frontend:
     command: bun run dev --host
     working_dir: web
-    readiness_probe:
-      http_get:
-        host: 127.0.0.1
-        port: 3000
-        path: /
-      initial_delay_seconds: 2
-      period_seconds: 5
