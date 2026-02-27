@@ -9,7 +9,7 @@ const App = () => {
     const checkHealth = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`${import.meta.env.VITE_BE_URL}/core/health/`);
+            const response = await axios.get<{ status: string }>(`${import.meta.env.VITE_BE_URL}/core/health/`);
 
             setStatus(response.data.status === 'ok' ? 'Healthy' : 'Unhealthy');
         } catch {
