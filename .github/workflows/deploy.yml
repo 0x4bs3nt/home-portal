@@ -25,7 +25,8 @@ jobs:
             cd /www/home-portal
 
             # Pull latest changes
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
 
             # Backend deployment
             cd backend
